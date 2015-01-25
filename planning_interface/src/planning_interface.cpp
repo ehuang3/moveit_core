@@ -78,9 +78,9 @@ void planning_interface::PlanningContext::setPlanningScene(const planning_scene:
 void planning_interface::PlanningContext::setMotionPlanRequest(const MotionPlanRequest &request)
 {
   request_ = request;
-  if (request_.allowed_planning_time <= 0.0)
+  if (request_.allowed_planning_time < 0.0)
   {
-    logInform("The timeout for planning must be positive (%lf specified). Assuming one second instead.", request_.allowed_planning_time);
+    logInform("The timeout for planning must be non-negative (%lf specified). Assuming one second instead.", request_.allowed_planning_time);
     request_.allowed_planning_time = 1.0;
   }
   if (request_.num_planning_attempts < 0)
